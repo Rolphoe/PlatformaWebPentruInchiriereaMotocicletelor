@@ -124,7 +124,7 @@
                                 <input type="number" id="mileage" name="mileage" class="form-control">
                             </div>
                             <div class="text-end">
-                            <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică kilometraj-ul</button>
+                                <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică kilometraj-ul</button>
                             </div>
                         </form>
                     </div>
@@ -135,7 +135,7 @@
                                 <input type="text" id="colour" name="colour" class="form-control">
                             </div>
                             <div class="text-end">
-                            <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică culoarea</button>
+                                <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică culoarea</button>
                             </div>
                         </form>
                     </div>
@@ -146,14 +146,14 @@
                                 <input type="number" id="price" name="price" class="form-control">
                             </div>
                             <div class="text-end">
-                            <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică prețul</button>
+                                <button type="submit" class="btn btn-primary mt-3 mb-3 right-align-button">Modifică prețul</button>
                             </div>
                         </form>
                     </div>
                     </p>
                     <div class="card-body d-flex justify-content-center flex-wrap">
-                        <form th:action="@{'/rent/create-new-rent/'+${vehicle.id}}" method="post" class="mr-2">
-                        <button th:class="${vehicle.status == 'Inchiriat'} ? 'btn btn-danger' : 'btn btn-primary'"
+                        <form th:action="@{'/admin/rent/vehicle/'+${vehicle.id}}" method="post" class="mr-2">
+                            <button th:class="${vehicle.status == 'Inchiriat'} ? 'btn btn-danger' : 'btn btn-primary'"
                                     th:disabled="${vehicle.status == 'Inchiriat'}" type="submit">
                                 <span th:if="${vehicle.status == 'Inchiriat'}">Închiriat</span>
                                 <span th:if="${vehicle.status != 'Inchiriat'}">Închiriază</span>

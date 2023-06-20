@@ -54,7 +54,7 @@ public class RentWebController {
 
     @PostMapping("/rent/create-new-rent")
     public String createNewRent(@ModelAttribute(value = "createRentRequest") CreateRentRequest request,
-                                       Model model) {
+                                Model model) {
         RentRequest rentRequest = RentRequest.builder()
                 .rentStartDateTime(request.getRentStartDateTime())
                 .rentEndDateTime(request.getRentEndDateTime())
@@ -69,28 +69,51 @@ public class RentWebController {
         return "allRentsPage";
     }
 
-    @PostMapping("/rent/create-new-rent/{vehicleId}")
-    public String createNewRent(@PathVariable int vehicleId,
-                                @ModelAttribute(value = "createRentRequest") CreateRentRequest request,
-                                Model model) {
+    @GetMapping("/rent/vehicle/{id}")
+    public String displayRentForm(@PathVariable("id") Integer id, Model model) {
+        Vehicle vehicle = vehicleService.getById(id);
+        if (vehicle == null) {
+            return "errorPage";
+        }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        int userId = user.getId();
+        model.addAttribute("vehicle", vehicle);
 
-        RentRequest rentRequest = RentRequest.builder()
-                .rentStartDateTime(request.getRentStartDateTime())
-                .rentEndDateTime(request.getRentEndDateTime())
-                .userId(userId)
-                .vehicleId(vehicleId)
-                .branchTakeId(request.getBranchTakeId())
-                .branchLeaveId(request.getBranchLeaveId())
-                .build();
+        CreateRentRequest rentRequest = new CreateRentRequest();
+        rentRequest.setVehicleId(id);
+        model.addAttribute("createRentRequest", rentRequest);
+        model.addAttribute("allBranches", branchService.getAllBranches());
+        return "inchiriereVehicul";
+    }
 
-        rentService.createRent(rentRequest);
+    @PostMapping("/rent/vehicle/{id}")
+    public String submitRentForm(@PathVariable int id, @ModelAttribute("createRentRequest") CreateRentRequest request, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("vehicle", vehicleService.getById(id));
+            model.addAttribute("allBranches", branchService.getAllBranches());
+            return "inchiriazaVehicul";
+        }
 
-        model.addAttribute("rents", rentService.findAll());
-        return "allRentsPage";
+        RentRequest rentRequest = rentMapper.map(request);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            return "errorPage";
+        }
+
+        rentRequest.setUserId(user.getId());
+
+        try {
+            rentService.createRent(rentRequest);
+        } catch (RuntimeException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            model.addAttribute("vehicle", vehicleService.getById(id));
+            model.addAttribute("allBranches", branchService.getAllBranches());
+            return "inchiriereVehicul";
+        }
+
+        return "allVehiclesPage";
     }
 
     @GetMapping("/rent/delete")

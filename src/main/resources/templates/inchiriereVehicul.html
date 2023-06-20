@@ -97,7 +97,7 @@
     <div class="col-md-6">
       <div class="card dark-card">
         <div class="card-body">
-          <form th:action="@{/rent/create-new-rent/} + ${vehicle.id}" th:object="${createRentRequest}" method="post" class="mt-4">
+          <form th:action="@{/rent/vehicle/} + ${vehicle.id}" th:object="${createRentRequest}" method="post" class="mt-4">
             <h2 class="mt-3 text-center" th:text="${vehicle.vehicleModel}">Model</h2>
             <ul class="list-group list-group-flush mt-3 vehicle-info-list">
               <li class="list-group-item"><strong>Culoare: </strong><span th:text="${vehicle.colour}"></span></li>
@@ -105,34 +105,35 @@
               <li class="list-group-item"><strong>An: </strong><span th:text="${vehicle.year}"></span></li>
               <li class="list-group-item"><strong>Pret: </strong><span th:text="${vehicle.price}"></span></li>
             </ul>
-          <div class="form-group">
-          <label for="rentStartDateTime">Data de început a închirierii</label>
-          <input type="datetime-local" th:field="*{rentStartDateTime}" class="form-control" id="rentStartDateTime" required>
-        </div>
-        <div class="form-group">
-          <label for="rentEndDateTime">Data de sfârșit a închirierii</label>
-          <input type="datetime-local" th:field="*{rentEndDateTime}" class="form-control" id="rentEndDateTime" required>
-        </div>
-        <div class="form-group">
-          <label for="branchTakeId">Locul de preluare</label>
-          <select th:field="*{branchTakeId}" class="form-control" id="branchTakeId" required>
-            <option value="" selected>Selectează magazinul</option>
-            <option th:each="branch : ${allBranches}"
-                    th:value="${branch.id}"
-                    th:text="${branch.name} + ', ' + ${branch.address}">
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="branchLeaveId">Locul de predare</label>
-          <select th:field="*{branchLeaveId}" class="form-control" id="branchLeaveId" required>
-            <option value="" selected>Selectează magazinul</option>
-            <option th:each="branch : ${allBranches}"
-                    th:value="${branch.id}"
-                    th:text="${branch.name} + ', ' + ${branch.address}">
-            </option>
-          </select>
-        </div>
+
+            <div class="form-group">
+              <label for="rentStartDateTime">Data de început a închirierii</label>
+              <input type="datetime-local" th:field="*{rentStartDateTime}" class="form-control" id="rentStartDateTime" required>
+            </div>
+            <div class="form-group">
+              <label for="rentEndDateTime">Data de sfârșit a închirierii</label>
+              <input type="datetime-local" th:field="*{rentEndDateTime}" class="form-control" id="rentEndDateTime" required>
+            </div>
+            <div class="form-group">
+              <label for="branchTakeId">Locul de preluare</label>
+              <select th:field="*{branchTakeId}" class="form-control" id="branchTakeId" required>
+                <option value="" selected>Selectează magazinul</option>
+                <option th:each="branch : ${allBranches}"
+                        th:value="${branch.id}"
+                        th:text="${branch.name} + ', ' + ${branch.address}">
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="branchLeaveId">Locul de predare</label>
+              <select th:field="*{branchLeaveId}" class="form-control" id="branchLeaveId" required>
+                <option value="" selected>Selectează magazinul</option>
+                <option th:each="branch : ${allBranches}"
+                        th:value="${branch.id}"
+                        th:text="${branch.name} + ', ' + ${branch.address}">
+                </option>
+              </select>
+            </div>
             <button type="submit" class="btn btn-primary mx-auto d-block">Închiriază</button>
           </form>
           <form th:action="@{/vehicle/allVehicles}" method="get" class="mt-3">
