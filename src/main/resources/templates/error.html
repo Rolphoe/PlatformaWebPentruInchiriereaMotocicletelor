@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title th:text="${message}"></title>
+</head>
+<body>
+<table border="2">
+  <tr><td>Status Code</td><td th:text="${status}"></td></tr>
+  <tr><td>Exception</td><td th:text="${exception}"></td></tr>
+  <tr><td>Stack Trace</td><td th:utext="${trace}"></td></tr>
+</table>
+</body>
+</html>

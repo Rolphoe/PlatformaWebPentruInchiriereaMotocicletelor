@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Despre</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <style>
+    .body {
+      background-color: #E4F3F2;
+      color: black;
+    }
+
+    .navbar {
+      background-color: #FF8C00;
+    }
+
+    .navbar p {
+      font-size: 24px;
+      color: #fff;
+      margin: 0;
+    }
+    .nav-item a:hover {
+      background-color: #FF4500;
+      color: #fff;
+    }
+    .nav-item a, .logout-btn {
+      color: #fff;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .nav-item a:hover, .logout-btn:hover {
+      background-color: #FF4500;
+      color: #fff;
+    }
+    .logout-form {
+      margin-right: 10px;
+      align-items: center;
+    }
+    .nav-item a {
+      color: #fff;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .btn {
+      width: 200px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body class="body">
+<div class="navbar py-2">
+  <ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+      <p>Închiriere motociclete</p>
+    </li>
+    <li class="nav-item">
+      <a href="/welcome" class="nav-link btn btn-outline-light my-2 my-sm-0">Acasă</a>
+    </li>
+    <li class="nav-item">
+      <a href="/despre" class="nav-link btn btn-outline-light my-2 my-sm-0">Despre</a>
+    </li>
+    <li class="nav-item">
+      <a href="/vehicle/allVehicles" class="nav-link btn btn-outline-light my-2 my-sm-0">Motociclete</a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/branch/allBranches" class="nav-link btn btn-outline-light my-2 my-sm-0"
+         sec:authorize="hasRole('ROLE_ADMIN')">Magazine</a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/allCustomers" class="nav-link btn btn-outline-light my-2 my-sm-0"
+         sec:authorize="hasRole('ROLE_ADMIN')">Utilizatori</a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/rent/allRents" class="nav-link btn btn-outline-light my-2 my-sm-0"
+         sec:authorize="hasRole('ROLE_ADMIN')">Închirieri</a>
+    </li>
+  </ul>
+  <ul class="nav ml-auto">
+    <form action="/logout" method="post" class="form-inline my-2 my-lg-0 logout-form">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      <button class="btn btn-outline-light my-2 my-sm-0 logout-btn" type="submit">Logout</button>
+    </form>
+  </ul>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <h2 class="my-4 text-center">DESPRE</h2>
+      <p>
+         Suntem o companie de închiriat motociclete, 24 de ore pe zi , de luni până duminică. Oricând ai nevoie de un mijloc de deplasare rapid, bine întreținut și rapid, site-ul nostru îți stă la dispoziție, printr-o accesare ușoară și inteligibilă.
+      </p>
+      <p>
+         Poți alege dintr-o gamă variată de motociclete, de diferite gabarituri. Fiabilitatea acestor motociclete o descoperi utilizându-le, comoditatea utilizării este percepută de la primul contact cu motorul, plăcerea de a le conduce vine călătorind.
+      </p>
+      <p>
+         Pot fi utilizate pentru deplasări rapide în localitate sau la distanțe mari de destinație,  cu portbagaj mic sau generos, în funcție de cerințe, ușor de închiriat de la locul de plecare și de returnat la locul de destinație.
+      </p>
+      <p>
+         Garanțiile sunt minimale, dar necesare pentru asigurarea unui bun flux de utilizare a motoarelor.
+      </p>
+      <p>
+         Întreținerea lor de bază este inclusă in contractul de închiriere într-un procent prestabilit pentru cei care utilizează motoarele pe termen lung.
+      </p>
+      <p>
+         Vacanțele devin surprinzătoare prin călătoria cu motocicleta, locuri inaccesibile autoturismelor fiind acum posibil de vizitat fără a face o investiție majoră într-un motor.
+      </p>
+      <p>
+         In caz de daune majore, contractul încheiat prevede  recuperarea daunelor în condiții prestabilite de comun acord, cu acoperirea totală sau parțială a acestora, după caz.
+      </p>
+      <p class="fs-4 fw-bold">
+         Vă urăm călătorie plăcută, oriunde v-ați deplasa!
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
