@@ -3,6 +3,9 @@ package inchhiriazaOMotocicleta.service;
 import inchhiriazaOMotocicleta.entity.*;
 import inchhiriazaOMotocicleta.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import inchhiriazaOMotocicleta.mapper.RentMapper;
@@ -68,7 +71,15 @@ public class RentService {
     }
 
     public List<RentResponse> findAll() {
-        return rentMapper.map(rentRepository.findAllByOrderByRentStartDateTimeDesc());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
+
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            return rentMapper.map(rentRepository.findAllByOrderByRentStartDateTimeDesc());
+        } else {
+            return rentMapper.map(rentRepository.findByUserId(user.getId()));
+        }
     }
 
 

@@ -91,10 +91,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-
     public void updateFirstName(Integer id, RequestUpdateFirstNameUser request) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Utilizatorul cu id-ul: %s nu a fost gasit!", id)));
         user.setFirstName(request.getFirstName());
+        userRepository.save(user);
+    }
+
+    public void updateRole(Integer id, RequestUpdateRoleUser request) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Utilizatorul cu id-ul: %s nu a fost gasit!", id)));
+        user.setRole(request.getRole());
         userRepository.save(user);
     }
 

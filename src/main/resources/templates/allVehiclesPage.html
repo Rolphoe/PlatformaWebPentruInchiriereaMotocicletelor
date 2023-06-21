@@ -78,16 +78,15 @@
             <a href="/vehicle/allVehicles" class="nav-link btn btn-outline-light my-2 my-sm-0">Motociclete</a>
         </li>
         <li class="nav-item">
+            <a href="/rent/allRents" class="nav-link btn btn-outline-light my-2 my-sm-0">Închirieri</a>
+        </li>
+        <li class="nav-item">
             <a href="/admin/branch/allBranches" class="nav-link btn btn-outline-light my-2 my-sm-0"
                sec:authorize="hasRole('ROLE_ADMIN')">Magazine</a>
         </li>
         <li class="nav-item">
             <a href="/admin/allCustomers" class="nav-link btn btn-outline-light my-2 my-sm-0"
                sec:authorize="hasRole('ROLE_ADMIN')">Utilizatori</a>
-        </li>
-        <li class="nav-item">
-            <a href="/admin/rent/allRents" class="nav-link btn btn-outline-light my-2 my-sm-0"
-               sec:authorize="hasRole('ROLE_ADMIN')">Închirieri</a>
         </li>
     </ul>
     <ul class="nav ml-auto">
@@ -152,7 +151,7 @@
                     </div>
                     </p>
                     <div class="card-body d-flex justify-content-center flex-wrap">
-                        <form th:action="@{'/admin/rent/vehicle/'+${vehicle.id}}" method="post" class="mr-2">
+                        <form th:action="@{/rent/goToCreateRentPageUser/} + ${vehicle.id}" class="mr-2">
                             <button th:class="${vehicle.status == 'Inchiriat'} ? 'btn btn-danger' : 'btn btn-primary'"
                                     th:disabled="${vehicle.status == 'Inchiriat'}" type="submit">
                                 <span th:if="${vehicle.status == 'Inchiriat'}">Închiriat</span>

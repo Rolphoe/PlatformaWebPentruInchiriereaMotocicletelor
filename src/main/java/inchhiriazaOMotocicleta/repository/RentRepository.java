@@ -1,5 +1,6 @@
 package inchhiriazaOMotocicleta.repository;
 
+import inchhiriazaOMotocicleta.model.rent.RentResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,6 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
     List<Rent> findByRentDateBetween(
             @Param("startDate") LocalDateTime dateFrom,
             @Param("endDate") LocalDateTime dateTo);
+
+    List<Rent> findByUserId(int id);
 }

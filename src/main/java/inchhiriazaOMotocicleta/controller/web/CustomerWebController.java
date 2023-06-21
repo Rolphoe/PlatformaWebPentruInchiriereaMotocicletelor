@@ -66,6 +66,14 @@ public class CustomerWebController {
         return "/allCustomersPage";
     }
 
+    @PostMapping("user/update-role")
+    public String updateRole(@ModelAttribute(value = "updateRole") RequestUpdateRoleUser request,
+                                  Model model) {
+        userService.updateRole(request.getId(), request);
+        model.addAttribute("users", userService.getAllUsers());
+        return "/allCustomersPage";
+    }
+
     @PostMapping("user/update-lastName")
     public String updateLastName(@ModelAttribute(value = "updateLastName") RequestUpdateLastNameUser request,
                                Model model) {

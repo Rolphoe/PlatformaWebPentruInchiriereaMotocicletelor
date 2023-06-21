@@ -73,13 +73,13 @@
       <a href="/vehicle/allVehicles" class="nav-link btn btn-outline-light my-2 my-sm-0">Motociclete</a>
     </li>
     <li class="nav-item">
+      <a href="/rent/allRents" class="nav-link btn btn-outline-light my-2 my-sm-0">Închirieri</a>
+    </li>
+    <li class="nav-item">
       <a href="/admin/branch/allBranches" class="nav-link btn btn-outline-light my-2 my-sm-0" sec:authorize="hasRole('ROLE_ADMIN')">Magazine</a>
     </li>
     <li class="nav-item">
       <a href="/admin/allCustomers" class="nav-link btn btn-outline-light my-2 my-sm-0" sec:authorize="hasRole('ROLE_ADMIN')">Utilizatori</a>
-    </li>
-    <li class="nav-item">
-      <a href="/admin/rent/allRents" class="nav-link btn btn-outline-light my-2 my-sm-0" sec:authorize="hasRole('ROLE_ADMIN')">Închirieri</a>
     </li>
   </ul>
   <ul class="nav ml-auto">
@@ -97,7 +97,7 @@
     <div class="col-md-6">
       <div class="card dark-card">
         <div class="card-body">
-          <form th:action="@{/rent/vehicle/} + ${vehicle.id}" th:object="${createRentRequest}" method="post" class="mt-4">
+          <form th:action="@{/admin/rent/create-new-rent}" method="post" class="mt-4">
             <h2 class="mt-3 text-center" th:text="${vehicle.vehicleModel}">Model</h2>
             <ul class="list-group list-group-flush mt-3 vehicle-info-list">
               <li class="list-group-item"><strong>Culoare: </strong><span th:text="${vehicle.colour}"></span></li>
