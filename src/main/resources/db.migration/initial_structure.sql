@@ -36,9 +36,9 @@ CREATE TABLE `rent`
     `vehicle_id`            int         DEFAULT NULL,
     `amount`                int         DEFAULT NULL,
     PRIMARY KEY (`id`),
-    KEY `FKcust` (`user_id`),
+    KEY `FKuser` (`user_id`),
     KEY `FKvehi` (`vehicle_id`),
-    CONSTRAINT `FKcust` FOREIGN KEY (`user_id`) REFERENCES `customer` (`id`),
+    CONSTRAINT `FKcust` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
     CONSTRAINT `FKvehi` FOREIGN KEY (`vehicle_id`) REFERENCES  `vehicle` (`id`)
 );
 
